@@ -7,7 +7,7 @@ public:
 	const char* value;
 
 	String(const char* value);
-	String(const String& value);
+	String(const String* value);
 	~String();
 
 	String operator + (String vector);

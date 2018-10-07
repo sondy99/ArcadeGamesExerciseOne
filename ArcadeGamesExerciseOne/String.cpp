@@ -6,7 +6,7 @@ String::String(const char* value) : value(value)
 	Length();
 }
 
-String::String(const String & string) : value(string.value)
+String::String(const String* string) : value(string->value)
 {
 	Length();
 }
