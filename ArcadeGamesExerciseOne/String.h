@@ -4,19 +4,22 @@
 class String
 {
 public:
-	const char* value;
-
+	String();
 	String(const char* value);
-	String(const String* value);
+	String(const String& string);
 	~String();
 
-	String operator + (String vector);
-	bool operator == (String vector);
+	String& operator + (const String &vector);
+	bool operator == (const String& vector);
 
 	int Length();
 	void Clear();
 private:
+	const char* value;
 	int length;
+
+	int Length(const char* value);
+	void CopyIntoInternalValue(const char* value);
 };
 
 #endif //__String__

@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Vector3.h"
-#include "Vector3.cpp"
 #include "String.h"
 
 using namespace std;
@@ -19,13 +18,14 @@ int main()
 	Vector3<int> vectorUno(1, 2, 3);
 	Vector3<int> vectorDos(-1, 2, 0);
 
-	float distance = vectorUno.DistanceTo(vectorDos);
+	float distance = vectorUno.DistanceTo(&vectorDos);
 
 	Vector3<int> sumResult = vectorUno + vectorDos;
 	//End Vector3
 
 	//Begin String
 	String stringUno("stringUno");
+
 	String secondString("SecondString");
 
 	String sum = stringUno + secondString;

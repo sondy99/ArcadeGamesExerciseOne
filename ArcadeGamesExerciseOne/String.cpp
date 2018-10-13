@@ -1,13 +1,21 @@
 #include "String.h"
 #include <stdlib.h>
 
-String::String(const char* value) : value(value)
+String::String()
 {
+	value = nullptr;
+	length = 0;
+}
+
+String::String(const char* value)
+{
+	CopyIntoInternalValue(value);
 	Length();
 }
 
-String::String(const String* string) : value(string->value)
+String::String(const String & string)
 {
+	CopyIntoInternalValue(string.value);
 	Length();
 }
 
@@ -15,11 +23,11 @@ String::~String()
 {
 }
 
-String String::operator+(String vector)
+String& String::operator+(const String &vector)
 {
 	const char* currentValueAux = value;
 	const char* vectorValueAux = vector.value;
-	int lengthVector = vector.Length();
+	int lengthVector = vector.length;
 	char* resultChar = (char*)malloc(length + lengthVector);
 	char* iterador = resultChar;
 
@@ -34,15 +42,14 @@ String String::operator+(String vector)
 	*iterador = '\0';
 
 	String result(resultChar);
-
 	return result;
 }
 
-bool String::operator==(String vector)
+bool String::operator==(const String& vector)
 {
 	const char* currentValueAux = value;
 	const char* vectorValueAux = vector.value;
-	int lengthVector = vector.Length();
+	int lengthVector = vector.length;
 
 	if (length != lengthVector) 
 	{
@@ -58,17 +65,34 @@ bool String::operator==(String vector)
 }
 
 int String::Length()
-{
-	const char* stringAux = value;
-	
-	length = 0;
-
-	while (*stringAux++ != 0) {
-		++length;
-	}
+{	
+	length = Length(value);
 
 	return length;
 }
+
+int String::Length(const char* value)
+{
+	int result = 0;
+
+	while (*value++ != 0) {
+		++result;
+	}
+
+	return result;
+}
+
+void String::CopyIntoInternalValue(const char * value)
+{
+	int length = Length(value);
+
+	char * copyed = (char*)malloc(length + 1);
+	char* iterador = copyed;
+	while (*iterador++ = *value++);
+
+	this->value = copyed;
+}
+
 
 void String::Clear()
 {
